@@ -15,21 +15,7 @@ document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', tg.s
 // Load current configuration
 window.addEventListener('DOMContentLoaded', () => {
     loadCurrentConfig();
-    setupEventListeners();
 });
-
-function setupEventListeners() {
-    const modeSelect = document.getElementById('mode');
-    const telegramConfig = document.getElementById('telegram-config');
-    
-    modeSelect.addEventListener('change', (e) => {
-        if (e.target.value === 'TELEGRAM') {
-            telegramConfig.style.display = 'block';
-        } else {
-            telegramConfig.style.display = 'none';
-        }
-    });
-}
 
 function loadCurrentConfig() {
     // Get current config from Telegram Web App init data
@@ -40,13 +26,12 @@ function loadCurrentConfig() {
         action: 'get_status'
     }));
     
-    // For demo, set default values
-    document.getElementById('current-mode').textContent = 'Loading...';
+    // Set default status
+    document.getElementById('current-status').textContent = 'Gateway Active';
     
     // Simulate loading current config (will be replaced with actual bot response)
     setTimeout(() => {
-        // This will be updated when we implement the bot response handler
-        document.getElementById('current-mode').textContent = 'TELEGRAM Mode Active';
+        document.getElementById('current-status').textContent = '✅ Gateway Active';
     }, 1000);
 }
 
@@ -64,34 +49,38 @@ function togglePassword(fieldId) {
 }
 
 async function saveConfig() {
-    const mode = document.getElementById('mode').value;
+    const wifiSsid = document.getElementById('wifi-ssid').value.trim();
+    const wifiPassword = document.getElementById('wifi-password').value;
+    const botToken = document.getElementById('bot-token').value.trim();
+    const chatId = document.getElementById('chat-id').value.trim();
+    const loraRegion = parseInt(document.getElementById('lora-region').value);
+    const loraModem = parseInt(document.getElementById('lora-modem').value);
+    
+    // Validation
+    if (!wifiSsid) {
+        showError('Please enter WiFi SSID');
+        return;
+    }
+    
+    if (!botToken || !chatId) {
+        showError('Please enter Telegram bot credentials');
+        return;
+    }
+    
+    if (loraRegion === 0) {
+        showError('Please select a LoRa region');
+        return;
+    }
+    
     const config = {
         action: 'save_config',
-        mode: mode
+        wifi_ssid: wifiSsid,
+        wifi_password: wifiPassword,
+        bot_token: botToken,
+        chat_id: chatId,
+        lora_region: loraRegion,
+        lora_modem: loraModem
     };
-    
-    if (mode === 'TELEGRAM') {
-        const wifiSsid = document.getElementById('wifi-ssid').value.trim();
-        const wifiPassword = document.getElementById('wifi-password').value;
-        const botToken = document.getElementById('bot-token').value.trim();
-        const chatId = document.getElementById('chat-id').value.trim();
-        
-        // Validation
-        if (!wifiSsid || !wifiPassword) {
-            showError('Please enter WiFi credentials');
-            return;
-        }
-        
-        if (!botToken || !chatId) {
-            showError('Please enter Telegram bot credentials');
-            return;
-        }
-        
-        config.wifi_ssid = wifiSsid;
-        config.wifi_password = wifiPassword;
-        config.bot_token = botToken;
-        config.chat_id = chatId;
-    }
     
     // Show loading
     showLoading();
@@ -156,12 +145,8 @@ window.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'config_status') {
         const status = event.data.data;
         
-        // Update current mode display
-        if (status.mode === 'TELEGRAM') {
-            document.getElementById('current-mode').textContent = '📡 TELEGRAM Mode Active';
-        } else {
-            document.getElementById('current-mode').textContent = '📱 DEFAULT Mode Active';
-        }
+        // Update current status display
+        document.getElementById('current-status').textContent = '✅ Gateway Active';
         
         // Pre-fill form if available
         if (status.wifi_ssid) {
@@ -170,15 +155,14 @@ window.addEventListener('message', (event) => {
         if (status.chat_id) {
             document.getElementById('chat-id').value = status.chat_id;
         }
-        
-        document.getElementById('mode').value = status.mode || 'DEFAULT';
-        
-        // Show/hide telegram config based on mode
-        const event_change = new Event('change');
-        document.getElementById('mode').dispatchEvent(event_change);
+        if (status.lora_region) {
+            document.getElementById('lora-region').value = status.lora_region;
+        }
+        if (status.lora_modem !== undefined) {
+            document.getElementById('lora-modem').value = status.lora_modem;
+        }
     }
 });
 
 // Notify Telegram that the app is ready
 tg.ready();
-

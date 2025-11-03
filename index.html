@@ -10,66 +10,98 @@
 <body>
     <div class="container">
         <header>
-            <h1>🛰️ Meshtastic Gateway</h1>
-            <p class="subtitle">Configure your Telegram Gateway</p>
+            <h1>🛰 Meshtastic Gateway</h1>
+            <p class="subtitle">Configure WiFi, Telegram & LoRa Settings</p>
         </header>
 
         <div id="status-card" class="card status-card">
             <div class="status-header">
                 <span class="status-icon">📡</span>
-                <span id="current-mode" class="status-text">Loading...</span>
+                <span id="current-status" class="status-text">Loading...</span>
             </div>
         </div>
 
         <div class="card">
-            <h2>⚙️ Configuration</h2>
+            <h2>📶 WiFi Settings</h2>
             
             <div class="form-group">
-                <label for="mode">Operating Mode</label>
-                <select id="mode" class="input">
-                    <option value="TELEGRAM">📡 TELEGRAM (Gateway Mode)</option>
-                    <option value="DEFAULT">📱 DEFAULT (Standard Meshtastic)</option>
-                </select>
-                <p class="hint">Switch between gateway and standard Meshtastic mode</p>
+                <label for="wifi-ssid">WiFi SSID *</label>
+                <input type="text" id="wifi-ssid" class="input" placeholder="Your WiFi Network" required>
             </div>
 
-            <div id="telegram-config" class="telegram-config">
-                <h3>WiFi Settings</h3>
-                
-                <div class="form-group">
-                    <label for="wifi-ssid">WiFi SSID</label>
-                    <input type="text" id="wifi-ssid" class="input" placeholder="Your WiFi Network">
-                </div>
+            <div class="form-group">
+                <label for="wifi-password">WiFi Password *</label>
+                <input type="password" id="wifi-password" class="input" placeholder="Your WiFi Password" required>
+                <button type="button" class="toggle-password" onclick="togglePassword('wifi-password')">👁️</button>
+                <p class="hint">Leave blank for open networks</p>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <label for="wifi-password">WiFi Password</label>
-                    <input type="password" id="wifi-password" class="input" placeholder="Your WiFi Password">
-                    <button type="button" class="toggle-password" onclick="togglePassword('wifi-password')">👁️</button>
-                </div>
+        <div class="card">
+            <h2>🤖 Telegram Settings</h2>
+            
+            <div class="form-group">
+                <label for="bot-token">Bot Token *</label>
+                <input type="password" id="bot-token" class="input" placeholder="1234567890:ABCdefGHIjklMNOpqrsTUVwxyz" required>
+                <button type="button" class="toggle-password" onclick="togglePassword('bot-token')">👁️</button>
+                <p class="hint">Get from @BotFather on Telegram</p>
+            </div>
 
-                <h3>Telegram Settings</h3>
-                
-                <div class="form-group">
-                    <label for="bot-token">Bot Token</label>
-                    <input type="password" id="bot-token" class="input" placeholder="123456:ABC-DEF...">
-                    <button type="button" class="toggle-password" onclick="togglePassword('bot-token')">👁️</button>
-                    <p class="hint">Get from @BotFather</p>
-                </div>
+            <div class="form-group">
+                <label for="chat-id">Chat ID *</label>
+                <input type="text" id="chat-id" class="input" placeholder="123456789" required>
+                <p class="hint">Get from @userinfobot on Telegram</p>
+            </div>
+        </div>
 
-                <div class="form-group">
-                    <label for="chat-id">Chat ID</label>
-                    <input type="text" id="chat-id" class="input" placeholder="123456789">
-                    <p class="hint">Get from @userinfobot</p>
-                </div>
+        <div class="card">
+            <h2>📡 LoRa Settings</h2>
+            
+            <div class="form-group">
+                <label for="lora-region">Region *</label>
+                <select id="lora-region" class="input" required>
+                    <option value="0">UNSET</option>
+                    <option value="1">US</option>
+                    <option value="2">EU_433</option>
+                    <option value="3" selected>EU_868</option>
+                    <option value="4">CN</option>
+                    <option value="5">JP</option>
+                    <option value="6">ANZ</option>
+                    <option value="7">KR</option>
+                    <option value="8">TW</option>
+                    <option value="9">RU</option>
+                    <option value="10">IN</option>
+                    <option value="11">NZ_865</option>
+                    <option value="12">TH</option>
+                    <option value="13">UA_433</option>
+                    <option value="14">UA_868</option>
+                </select>
+                <p class="hint">Select your LoRa frequency region</p>
+            </div>
+
+            <div class="form-group">
+                <label for="lora-modem">Modem Preset *</label>
+                <select id="lora-modem" class="input" required>
+                    <option value="0" selected>LONG_FAST (Default)</option>
+                    <option value="1">LONG_SLOW</option>
+                    <option value="2">VERY_LONG_SLOW</option>
+                    <option value="3">MEDIUM_SLOW</option>
+                    <option value="4">MEDIUM_FAST</option>
+                    <option value="5">SHORT_SLOW</option>
+                    <option value="6">SHORT_FAST</option>
+                    <option value="7">LONG_MODERATE</option>
+                </select>
+                <p class="hint">LoRa modulation settings (affects range/speed)</p>
             </div>
         </div>
 
         <div class="card info-card">
             <h3>ℹ️ How It Works</h3>
             <ul class="info-list">
-                <li><strong>TELEGRAM Mode:</strong> Gateway active, messages forwarded</li>
-                <li><strong>DEFAULT Mode:</strong> Standard Meshtastic, no WiFi</li>
-                <li><strong>Changes take effect:</strong> After device reboot (~30 seconds)</li>
+                <li><strong>Gateway Mode:</strong> Messages forwarded between LoRa mesh and Telegram</li>
+                <li><strong>Full Mesh:</strong> Device acts as a repeater for other nodes</li>
+                <li><strong>Changes take effect:</strong> After device reboot (~10 seconds)</li>
+                <li><strong>Reconfigure:</strong> Hold BOOT button for 3 seconds during power-on</li>
             </ul>
         </div>
 
@@ -107,4 +139,3 @@
     <script src="app.js"></script>
 </body>
 </html>
-

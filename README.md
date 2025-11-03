@@ -4,12 +4,13 @@ Telegram Web App for configuring the Meshtastic Telegram Gateway directly from T
 
 ## 📱 Features
 
-- ✅ Switch between TELEGRAM and DEFAULT modes
-- ✅ Configure WiFi credentials
+- ✅ Configure WiFi credentials (SSID and Password)
 - ✅ Set Telegram Bot Token and Chat ID
+- ✅ Configure LoRa Region and Modem Preset
 - ✅ Beautiful mobile-friendly interface
 - ✅ Integrated with Telegram theme
 - ✅ Real-time configuration updates
+- ✅ Saves configuration to NVS (Non-Volatile Storage)
 
 ## 🚀 Deployment
 
@@ -128,13 +129,16 @@ save_config  → Save new configuration and reboot
 ```json
 {
   "action": "save_config",
-  "mode": "TELEGRAM",
   "wifi_ssid": "MyNetwork",
   "wifi_password": "password123",
   "bot_token": "123456:ABC-DEF...",
-  "chat_id": "987654321"
+  "chat_id": "987654321",
+  "lora_region": 3,
+  "lora_modem": 0
 }
 ```
+
+**Note:** The gateway firmware runs in a single mode (full Meshtastic mesh + Telegram). There is no mode switching in the current implementation.
 
 ## 🎨 Customization
 
