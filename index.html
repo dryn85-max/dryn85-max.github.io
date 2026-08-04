@@ -1,141 +1,267 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Meshtastic Gateway Config</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrii Kozlov — AI & Software Engineer</title>
+  <meta name="description" content="AI & Software Engineer portfolio — AI-native platforms, LLM systems, automation, DevOps and embedded projects." />
+  <style>
+    :root{
+      --bg:#0f172a;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --accent:#38bdf8;
+      --border:#1f2937;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      background:linear-gradient(180deg,#0b1220,#111827);
+      color:var(--text);
+      line-height:1.6;
+    }
+    .container{
+      max-width:980px;
+      margin:0 auto;
+      padding:48px 20px 80px;
+    }
+    .hero{
+      padding:24px 0 8px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(2.2rem,5vw,3.5rem);
+      line-height:1.05;
+    }
+    .subtitle{
+      font-size:1.2rem;
+      color:var(--accent);
+      margin-bottom:18px;
+      font-weight:600;
+    }
+    p.lead{
+      max-width:760px;
+      color:#d1d5db;
+      font-size:1.05rem;
+    }
+    .links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:24px;
+    }
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:12px;
+      text-decoration:none;
+      color:#fff;
+      background:#0284c7;
+      border:1px solid #0ea5e9;
+      transition:.2s ease;
+    }
+    .btn.secondary{
+      background:transparent;
+      border-color:#334155;
+      color:var(--text);
+    }
+    .btn:hover{transform:translateY(-1px)}
+    section{
+      margin-top:48px;
+    }
+    h2{
+      margin-bottom:18px;
+      font-size:1.6rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:16px;
+    }
+    .card{
+      background:rgba(17,24,39,.75);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      backdrop-filter: blur(6px);
+    }
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.05rem;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    .tech{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .tag{
+      background:#0b1220;
+      border:1px solid #233047;
+      color:#cbd5e1;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.9rem;
+    }
+    footer{
+      margin-top:56px;
+      padding-top:24px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:.92rem;
+    }
+    a.inline{
+      color:var(--accent);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🛰 Meshtastic Gateway</h1>
-            <p class="subtitle">Configure WiFi, Telegram & LoRa Settings</p>
-        </header>
+  <div class="container">
+    <header class="hero">
+      <h1>Andrii Kozlov</h1>
+      <div class="subtitle">AI & Software Engineer • Málaga, Spain</div>
+      <p class="lead">
+        I build AI-native delivery platforms, LLM-powered systems, automation tools,
+        DevOps workflows, mobile applications, and embedded software. This site is my
+        personal software engineering portfolio.
+      </p>
 
-        <div id="status-card" class="card status-card">
-            <div class="status-header">
-                <span class="status-icon">📡</span>
-                <span id="current-status" class="status-text">Loading...</span>
-            </div>
-        </div>
+```
+  <div class="links">
+    <a class="btn" href="https://github.com/dryn85-max" target="_blank">GitHub Profile</a>
+    <a class="btn secondary" href="https://github.com/dryn85-max/AI_Native_Ecosystem" target="_blank">AI Native Ecosystem</a>
+  </div>
+</header>
 
-        <div class="card">
-            <h2>📶 WiFi Settings</h2>
-            
-            <div class="form-group">
-                <label for="wifi-ssid">WiFi SSID *</label>
-                <input type="text" id="wifi-ssid" class="input" placeholder="Your WiFi Network" required>
-            </div>
+<section>
+  <h2>Featured AI Projects</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>AI_Native_Ecosystem</h3>
+      <p>Requirements-driven AI delivery ecosystem with agents, critics, documentation and platform architecture.</p>
+    </article>
+    <article class="card">
+      <h3>AIFactory</h3>
+      <p>AI factory and automation workflows for software delivery and operational processes.</p>
+    </article>
+    <article class="card">
+      <h3>Zendesk_AI_bot</h3>
+      <p>LLM-powered support automation integrated with Zendesk.</p>
+    </article>
+    <article class="card">
+      <h3>AI_usage_tracker</h3>
+      <p>Tracking, analytics and observability for AI and LLM usage.</p>
+    </article>
+  </div>
+</section>
 
-            <div class="form-group">
-                <label for="wifi-password">WiFi Password *</label>
-                <input type="password" id="wifi-password" class="input" placeholder="Your WiFi Password" required>
-                <button type="button" class="toggle-password" onclick="togglePassword('wifi-password')">👁️</button>
-                <p class="hint">Leave blank for open networks</p>
-            </div>
-        </div>
+<section>
+  <h2>Developer Platforms & Tools</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>Talent-Project-Platform</h3>
+      <p>Platform connecting talent, projects and delivery workflows.</p>
+    </article>
+    <article class="card">
+      <h3>QuickPOS</h3>
+      <p>Point-of-sale software and business automation tooling.</p>
+    </article>
+    <article class="card">
+      <h3>LaserCutCalc</h3>
+      <p>Engineering and fabrication calculation utilities.</p>
+    </article>
+    <article class="card">
+      <h3>Cita</h3>
+      <p>Appointment and workflow management application.</p>
+    </article>
+  </div>
+</section>
 
-        <div class="card">
-            <h2>🤖 Telegram Settings</h2>
-            
-            <div class="form-group">
-                <label for="bot-token">Bot Token *</label>
-                <input type="password" id="bot-token" class="input" placeholder="1234567890:ABCdefGHIjklMNOpqrsTUVwxyz" required>
-                <button type="button" class="toggle-password" onclick="togglePassword('bot-token')">👁️</button>
-                <p class="hint">Get from @BotFather on Telegram</p>
-            </div>
+<section>
+  <h2>Mobile & Embedded</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>AIGolf_iphone</h3>
+      <p>iPhone application for AI-assisted golf workflows.</p>
+    </article>
+    <article class="card">
+      <h3>RP2040-Zero-RGB</h3>
+      <p>Firmware and embedded development for RP2040 hardware.</p>
+    </article>
+    <article class="card">
+      <h3>tesla-charger-controller</h3>
+      <p>Controller software for EV charging hardware integration.</p>
+    </article>
+    <article class="card">
+      <h3>meshtastic2telegram</h3>
+      <p>Meshtastic-to-Telegram gateway and messaging integration.</p>
+    </article>
+  </div>
+</section>
 
-            <div class="form-group">
-                <label for="chat-id">Chat ID *</label>
-                <input type="text" id="chat-id" class="input" placeholder="123456789" required>
-                <p class="hint">Get from @userinfobot on Telegram</p>
-            </div>
-        </div>
+<section>
+  <h2>AI Experiments</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>AIGolf-telegram</h3>
+      <p>Telegram bot with AI-assisted golf features.</p>
+    </article>
+    <article class="card">
+      <h3>Harley-Hunter-AI</h3>
+      <p>AI-assisted marketplace analysis and vehicle search automation.</p>
+    </article>
+    <article class="card">
+      <h3>trading_bots</h3>
+      <p>Algorithmic trading experiments and automation research.</p>
+    </article>
+    <article class="card">
+      <h3>AIF_integration</h3>
+      <p>Integration experiments for AI services and workflows.</p>
+    </article>
+  </div>
+</section>
 
-        <div class="card">
-            <h2>📡 LoRa Settings</h2>
-            
-            <div class="form-group">
-                <label for="lora-region">Region *</label>
-                <select id="lora-region" class="input" required>
-                    <option value="0">UNSET</option>
-                    <option value="1">US</option>
-                    <option value="2">EU_433</option>
-                    <option value="3" selected>EU_868</option>
-                    <option value="4">CN</option>
-                    <option value="5">JP</option>
-                    <option value="6">ANZ</option>
-                    <option value="7">KR</option>
-                    <option value="8">TW</option>
-                    <option value="9">RU</option>
-                    <option value="10">IN</option>
-                    <option value="11">NZ_865</option>
-                    <option value="12">TH</option>
-                    <option value="13">UA_433</option>
-                    <option value="14">UA_868</option>
-                </select>
-                <p class="hint">Select your LoRa frequency region</p>
-            </div>
+<section>
+  <h2>Technologies</h2>
+  <div class="tech">
+    <span class="tag">Python</span>
+    <span class="tag">AWS</span>
+    <span class="tag">Azure</span>
+    <span class="tag">DevOps</span>
+    <span class="tag">GitHub Actions</span>
+    <span class="tag">LLMs</span>
+    <span class="tag">MLX</span>
+    <span class="tag">Docker</span>
+    <span class="tag">iOS</span>
+    <span class="tag">Embedded</span>
+    <span class="tag">Telegram Bots</span>
+  </div>
+</section>
 
-            <div class="form-group">
-                <label for="lora-modem">Modem Preset *</label>
-                <select id="lora-modem" class="input" required>
-                    <option value="0" selected>LONG_FAST (Default)</option>
-                    <option value="1">LONG_SLOW</option>
-                    <option value="2">VERY_LONG_SLOW</option>
-                    <option value="3">MEDIUM_SLOW</option>
-                    <option value="4">MEDIUM_FAST</option>
-                    <option value="5">SHORT_SLOW</option>
-                    <option value="6">SHORT_FAST</option>
-                    <option value="7">LONG_MODERATE</option>
-                </select>
-                <p class="hint">LoRa modulation settings (affects range/speed)</p>
-            </div>
-        </div>
+<section>
+  <h2>About</h2>
+  <p>
+    I focus on AI-native software delivery, developer productivity, automation,
+    local LLM inference on Apple Silicon, and practical AI systems for business
+    and engineering teams.
+  </p>
+  <p>
+    GitHub: <a class="inline" href="https://github.com/dryn85-max" target="_blank">github.com/dryn85-max</a>
+  </p>
+</section>
 
-        <div class="card info-card">
-            <h3>ℹ️ How It Works</h3>
-            <ul class="info-list">
-                <li><strong>Gateway Mode:</strong> Messages forwarded between LoRa mesh and Telegram</li>
-                <li><strong>Full Mesh:</strong> Device acts as a repeater for other nodes</li>
-                <li><strong>Changes take effect:</strong> After device reboot (~10 seconds)</li>
-                <li><strong>Reconfigure:</strong> Hold BOOT button for 3 seconds during power-on</li>
-            </ul>
-        </div>
+<footer>
+  © 2026 Andrii Kozlov • Personal software engineering portfolio
+</footer>
+```
 
-        <div class="button-group">
-            <button id="save-btn" class="btn btn-primary" onclick="saveConfig()">
-                💾 Save & Reboot
-            </button>
-            <button id="cancel-btn" class="btn btn-secondary" onclick="closeApp()">
-                ❌ Cancel
-            </button>
-        </div>
-
-        <div id="loading" class="loading hidden">
-            <div class="spinner"></div>
-            <p>Saving configuration...</p>
-        </div>
-
-        <div id="success" class="message success hidden">
-            <span class="icon">✅</span>
-            <div class="text">
-                <strong>Configuration Saved!</strong>
-                <p>Device will reboot in a few seconds...</p>
-            </div>
-        </div>
-
-        <div id="error" class="message error hidden">
-            <span class="icon">❌</span>
-            <div class="text">
-                <strong>Error!</strong>
-                <p id="error-message">Failed to save configuration</p>
-            </div>
-        </div>
-    </div>
-
-    <script src="app.js"></script>
+  </div>
 </body>
 </html>
